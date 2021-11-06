@@ -11,3 +11,11 @@ h1, h2 {
 .buttonholder {
 	text-align: center;
 }
+
+.footer {
+	position: relative;
+	margin-bottom: -150px;
+	height: 150px;
+	clear: both;
+	padding-top: 100px;
+}

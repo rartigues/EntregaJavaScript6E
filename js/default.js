@@ -1,4 +1,8 @@
 let cOrdenes=0;
+let chileLocale= Intl.NumberFormat('es-CL', {
+  style: 'currency',
+  currency: 'CLP'
+});
 class Producto {
   #id;
   #nombre;
@@ -32,8 +36,10 @@ class Producto {
   set cantidad(cantidad) {
     this.#cantidad = Number(cantidad);
   }
+
 }
 
+//todo juntar cuando se suman las cantidades
 class Carrito {
   #productos;
   #total;
@@ -44,13 +50,21 @@ class Carrito {
   addProducto(Producto) {
     this.#productos.push(Producto);
     this.#total += Producto.precio*Producto.cantidad;
-    document.getElementById("totall").innerHTML = this.#total;
+    document.getElementById("totall").innerHTML = chileLocale.format(this.#total);
+    //document.getElementById("cart-count").innerHTML = carrito.nCantidades();
+  }
+  nCantidades() {
+    let cantidades = 0;
+    for (let i = 0; i < this.#productos.length; i++) {
+      cantidades += this.#productos[i].cantidad;
+    }
+    return cantidades;
   }
   getProductos() {
     return this.#productos;
   }
   getTotal() {
-    return this.#total;
+    return chileLocale.format(this.#total);
   }
 }
 
@@ -60,8 +74,45 @@ function agregar(form) {
   let cantidad = form.cantidad.value;
   let producto = new Producto(nombre, precio, cantidad);
   carrito.addProducto(producto);
+  openCart();
+
+}
+
+
+
+
+
+//Generar HTML de productos en Carrito
+const tbody = document.getElementById("cart-items");
+function openCart() {
+  let productos = carrito.getProductos();
+  let total = carrito.getTotal();
+  let html = "";
+  for (let i = 0; i < productos.length; i++) {
+    let temp= chileLocale.format(productos[i].precio*productos[i].cantidad); //Conseguir precio total en formato pesos chilenos
+    html += `
+    <tr>
+      <th>${productos[i].nombre}</th>
+      <td>${productos[i].precio}</td>
+      <td>${productos[i].cantidad}</td>
+      <td>${temp}</td>
+      <td>
+        <button class="btn btn-sm btn-danger" onclick="deleteProduct(${productos[i].id})">
+          <i class="fas fa-trash"></i>
+          Eliminar
+        </button>
+      </td>
+    </tr>`;
+  }
+  tbody.innerHTML = html;
+  document.getElementById("totall").innerHTML = total;
+  //document.getElementById("cart-count").innerHTML = carrito.nCantidades();
 }
 
 
 let carrito = new Carrito();
 document.getElementById("totall").innerHTML = carrito.getTotal();
+//document.getElementById("cart-count").innerHTML = carrito.nCantidades();
+openCart();
+
+//!todo Agrupar las ordenes del mismo producto en el mismo lugar del array
