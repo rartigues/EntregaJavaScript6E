@@ -126,3 +126,6 @@ openCart();
 //todo Agrupar las ordenes del mismo producto en el mismo lugar del array
 //todo Tambien implementar boton eliminar 1 item del producto
 // lo anterior tambien sirve para subir desafio complementario cap 6
+
+//todo Implementar actionlistener para los botones
+// sirve para desafio cap 9
