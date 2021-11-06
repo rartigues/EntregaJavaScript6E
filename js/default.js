@@ -50,8 +50,7 @@ class Carrito {
   addProducto(Producto) {
     this.#productos.push(Producto);
     this.#total += Producto.precio*Producto.cantidad;
-    document.getElementById("totall").innerHTML = chileLocale.format(this.#total);
-    //document.getElementById("cart-count").innerHTML = carrito.nCantidades();
+    updatePrecios();
   }
   nCantidades() {
     let cantidades = 0;
@@ -78,6 +77,16 @@ function agregar(form) {
 
 }
 
+function updatePrecios(){
+  let productos = carrito.getProductos();
+  let total = 0;
+  for (let i = 0; i < productos.length; i++) {
+    total += productos[i].precio*productos[i].cantidad;
+  }
+  document.getElementById("totall").innerHTML = chileLocale.format(total);
+  document.getElementById("cart-total").innerHTML = chileLocale.format(total);
+
+}
 
 
 
@@ -111,8 +120,10 @@ function openCart() {
 
 
 let carrito = new Carrito();
-document.getElementById("totall").innerHTML = carrito.getTotal();
-//document.getElementById("cart-count").innerHTML = carrito.nCantidades();
+updatePrecios();
 openCart();
 
-//!todo Agrupar las ordenes del mismo producto en el mismo lugar del array
+
+
+//todo Agrupar las ordenes del mismo producto en el mismo lugar del array
+//todo Tambien implementar boton eliminar 1 item del producto
