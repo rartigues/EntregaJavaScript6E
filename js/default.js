@@ -83,7 +83,7 @@ function updatePrecios(){
   for (let i = 0; i < productos.length; i++) {
     total += productos[i].precio*productos[i].cantidad;
   }
-  document.getElementById("totall").innerHTML = chileLocale.format(total);
+  //document.getElementById("totall").innerHTML = chileLocale.format(total);
   document.getElementById("cart-total").innerHTML = chileLocale.format(total);
 
 }
@@ -114,8 +114,6 @@ function openCart() {
     </tr>`;
   }
   tbody.innerHTML = html;
-  document.getElementById("totall").innerHTML = total;
-  //document.getElementById("cart-count").innerHTML = carrito.nCantidades();
 }
 
 
@@ -127,3 +125,4 @@ openCart();
 
 //todo Agrupar las ordenes del mismo producto en el mismo lugar del array
 //todo Tambien implementar boton eliminar 1 item del producto
+// lo anterior tambien sirve para subir desafio complementario cap 6
