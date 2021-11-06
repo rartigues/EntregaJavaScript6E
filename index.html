@@ -2,8 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
-    <!-- !Me pegue el show aca con probar usar favicon jajaj -->
     <link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
@@ -13,8 +11,6 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="/ico/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
@@ -34,51 +30,7 @@
       <p class="center" align="center"><small>Precios en pesos chilenos (CLP)</small></p>
     </header>
 
-    <!--!Posible uso futuro?
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">
-        <img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/shop">Tienda</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about">Acerca de</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/contact">Contacto</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/cart">Carrito</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Buscar"
-          />
-        </form>
-      </div>
-    </nav>-->
-    
     <!--TODO Carro de compras-->
     <div class="container">
       <div class="row">
@@ -89,7 +41,7 @@
                 <div class="col-sm-6">
                   <h4>Carrito de compras </h4>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-1">
                   <!--<button class="btn btn-sm btn-success" onclick="openCart()">
                     <i class="fas fa-cart-plus"></i>
                     <span id="cart-count">0</span>
@@ -108,30 +60,38 @@
                     </tr>
                   </thead>
                   <tbody id="cart-items">
-                    <!-- Se inserta codigo del archivo Js -->
+
+                    <!--! Se inserta codigo del archivo Js -->
                   </tbody>
                 </table>
               </div>
+              <p></p>
               <div class="row">
                 <div class="col-sm-6">
                   <button class="btn btn-sm btn-secondary">
                     <i class="fas fa-angle-left"></i>
                     Continuar comprando
                   </button>
-                </div>
-                <div class="col-sm-6 text-right">
                   <button class="btn btn-sm btn-success">
                     Finalizar compra
                     <i class="fas fa-angle-right"></i>
                   </button>
                 </div>
+                <div class="col-sm-6">
+                  <div class="float-right">
+                    <p>
+                      <strong>Total:</strong>
+                      <span id="cart-total">$0</span>
+                    </p>
+                  </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- Sector productos-->
+
+    <!--! Sector productos-->
     <p></p>
     <div class="container">
       <div class="row">
