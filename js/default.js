@@ -1,4 +1,3 @@
-let cOrdenes=0;
 let chileLocale= Intl.NumberFormat('es-CL', {
   style: 'currency',
   currency: 'CLP'
@@ -8,12 +7,11 @@ class Producto {
   #nombre;
   #precio;  
   #cantidad; 
-  constructor(nombre, precio, cantidad) {
-    this.#id = cOrdenes+1;
+  constructor(id, nombre, precio, cantidad) {
+    this.#id = Number(id);
     this.#nombre = nombre;
     this.#precio = Number(precio);
     this.#cantidad = Number(cantidad);
-    cOrdenes++;
   }
   get id() {
     return this.#id;
@@ -48,7 +46,15 @@ class Carrito {
     this.#total = 0;
   }
   addProducto(Producto) {
-    this.#productos.push(Producto);
+    let eval= 0;
+    for(let i = 0; i < this.#productos.length; i++) {
+      if(this.#productos[i].id === Producto.id) {
+        eval=1;
+        this.#productos[i].cantidad += Producto.cantidad;
+        break;
+      }  
+    } 
+    if(eval==0) this.#productos.push(Producto);
     this.#total += Producto.precio*Producto.cantidad;
     updatePrecios();
   }
@@ -68,13 +74,13 @@ class Carrito {
 }
 
 function agregar(form) {
+  let id = form.id.value;
   let nombre = form.nombre.value;
   let precio = form.precio.value;
   let cantidad = form.cantidad.value;
-  let producto = new Producto(nombre, precio, cantidad);
+  let producto = new Producto(id, nombre, precio, cantidad);
   carrito.addProducto(producto);
   openCart();
-
 }
 
 function updatePrecios(){
