@@ -46,15 +46,15 @@ class Carrito {
     this.#total = 0;
   }
   addProducto(Producto) {
-    let eval= 0;
     for(let i = 0; i < this.#productos.length; i++) {
       if(this.#productos[i].id === Producto.id) {
-        eval=1;
         this.#productos[i].cantidad += Producto.cantidad;
-        break;
+        this.#total += Producto.precio*Producto.cantidad;
+        updatePrecios();
+        return;
       }  
     } 
-    if(eval==0) this.#productos.push(Producto);
+    this.#productos.push(Producto);
     this.#total += Producto.precio*Producto.cantidad;
     updatePrecios();
   }
