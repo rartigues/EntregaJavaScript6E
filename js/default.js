@@ -195,7 +195,7 @@ function trueId(id) {
 let carrito = new Carrito();
 if (localStorage.getItem("carrito")) {
   carrito = Serializable.deserialize(localStorage.getItem("carrito"));
-  console.log(carrito);
+  // console.log(carrito);
 } else {
   localStorage.setItem("carrito", Serializable.serialize(carrito));
 }
