@@ -1,15 +1,16 @@
-const ESSerializer = require('esserializer');
+const Serializable = require('jsclass-serializer');
 
 let chileLocale= Intl.NumberFormat('es-CL', {
   style: 'currency',
   currency: 'CLP'
 });
-class Producto {
+class Producto extends Serializable {
   #id;
   #nombre;
   #precio;  
   #cantidad; 
   constructor(id, nombre, precio, cantidad) {
+    super();
     this.#id = Number(id);
     this.#nombre = nombre;
     this.#precio = Number(precio);
@@ -56,6 +57,7 @@ class Carrito {
         return;
       }  
     } 
+
     this.#productos.push(Producto);
     this.#total += Producto.precio*Producto.cantidad;
     updatePrecios();
@@ -90,6 +92,10 @@ function agregar(e) {
   
 
   carrito.addProducto(producto);
+  let test= Serializable.serialize(producto);
+  console.log(test);
+  let test2= Serializable.deserialize(test);
+  console.log(test2);
   localStorage.setItem("productos", JSON.stringify(carrito.getProductos())); //!Pasar productos a localstorage
   openCart();
   e.preventDefault();
@@ -103,11 +109,6 @@ const formFrutilla = document.getElementById("formFrutilla");
 formVainilla.addEventListener("submit", agregar);
 formChocolate.addEventListener("submit", agregar);
 formFrutilla.addEventListener("submit", agregar);
-
-
-
-// const carritoSerialized= serialize(carrito);
-// console.log(carritoSerialized);
 
 
 
@@ -160,7 +161,6 @@ if (localStorage.getItem("productos")) {
   localStorage.setItem("productos", JSON.stringify(carrito.getProductos()));
 }
 
-console.log(ESSerializer.serialize(carrito));
 updatePrecios();
 openCart();
 
