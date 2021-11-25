@@ -1,4 +1,4 @@
-# Coderhouse Entrega Javascript 6E
+# Coderhouse Entrega Proyecto Javascript
 Por Roberto Artigues
 
 <sub><sup>(Numero de entrega es igual al numero del capitulo al que corresponde)</sup></sub>
