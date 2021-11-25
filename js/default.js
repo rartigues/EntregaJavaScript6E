@@ -87,7 +87,6 @@ class Carrito extends Serializable {
 
 function agregar(e) {
   let id= e.target.id.value;
-  console.log(id);
   let nombre= e.target.nombre.value;
   let precio= e.target.precio.value;
   let cantidad= e.target.cantidad.value;
@@ -122,9 +121,7 @@ function updatePrecios(){
   for (let i = 0; i < productos.length; i++) {
     total += productos[i].precio*productos[i].cantidad;
   }
-  //document.getElementById("totall").innerHTML = chileLocale.format(total);
   document.getElementById("cart-total").innerHTML = chileLocale.format(total);
-
 }
 
 
