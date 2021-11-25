@@ -1,3 +1,5 @@
+const ESSerializer = require('esserializer');
+
 let chileLocale= Intl.NumberFormat('es-CL', {
   style: 'currency',
   currency: 'CLP'
@@ -68,6 +70,12 @@ class Carrito {
   getProductos() {
     return this.#productos;
   }
+  addProductos(productos) {
+    for(let i = 0; i < productos.length; i++) {
+      console.log(productos[i]);
+      this.addProducto(productos[i]);
+    }
+  }
   getTotal() {
     return chileLocale.format(this.#total);
   }
@@ -80,7 +88,9 @@ function agregar(e) {
   let cantidad= e.target.cantidad.value;
   let producto = new Producto(id, nombre, precio, cantidad);
   
+
   carrito.addProducto(producto);
+  localStorage.setItem("productos", JSON.stringify(carrito.getProductos())); //!Pasar productos a localstorage
   openCart();
   e.preventDefault();
 }
@@ -96,7 +106,8 @@ formFrutilla.addEventListener("submit", agregar);
 
 
 
-
+// const carritoSerialized= serialize(carrito);
+// console.log(carritoSerialized);
 
 
 
@@ -141,16 +152,22 @@ function openCart() {
   tbody.innerHTML = html;
 }
 
-
 let carrito = new Carrito();
+if (localStorage.getItem("productos")) {
+  console.log(localStorage.getItem("productos"))
+  carrito.addProductos(JSON.parse(localStorage.getItem("productos")));
+} else {
+  localStorage.setItem("productos", JSON.stringify(carrito.getProductos()));
+}
+
+console.log(ESSerializer.serialize(carrito));
 updatePrecios();
 openCart();
 
 
 
-//todo Agrupar las ordenes del mismo producto en el mismo lugar del array
 //todo Tambien implementar boton eliminar 1 item del producto
 // lo anterior tambien sirve para subir desafio complementario cap 6
-
-//todo Implementar actionlistener para los botones
-// sirve para desafio cap 9
+//todo implementar boton eliminar todos los productos
+ //!Esta bug ahora (objeto productos a localstorage)
+//todo pasar productos a localstorage

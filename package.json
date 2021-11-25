@@ -1,0 +1,33 @@
+{
+  "name": "entregajavascript6e",
+  "version": "1.0.0",
+  "description": "Por Roberto Artigues",
+  "main": "./index.js",
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "esserializer": "^1.2.3",
+    "watchify": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^10.0.0"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/browserify ./js/default.js -o dist/bundle.js",
+    "watch": "watchify ./js/default -o dist/bundle.js -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rartigues/EntregaJavaScript6E.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rartigues/EntregaJavaScript6E/issues"
+  },
+  "homepage": "https://github.com/rartigues/EntregaJavaScript6E#readme"
+  
+}
