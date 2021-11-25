@@ -96,12 +96,6 @@ function agregar(e) {
 
   carrito.addProducto(producto);
   //!PRUEBA SERELIAZABLE
-  let test= Serializable.serialize(producto);
-  console.log(test);
-  let test2= Serializable.deserialize(test);
-  console.log(test2);
-  console.log(test2 instanceof Producto);
-  console.log(test2.id);
   localStorage.setItem("carrito", Serializable.serialize(carrito)); //!
   openCart();
   e.preventDefault();
@@ -122,7 +116,6 @@ formFrutilla.addEventListener("submit", agregar);
 
 
 
-
 function updatePrecios(){
   let productos = carrito.getProductos();
   let total = 0;
@@ -133,6 +126,24 @@ function updatePrecios(){
   document.getElementById("cart-total").innerHTML = chileLocale.format(total);
 
 }
+
+
+//Al ejecutarse elimina el producto del carrito
+function deleteProduct(id) {
+  let productos = carrito.getProductos();
+  for (let i = 0; i < productos.length; i++) {
+    if(productos[i].id === id) {
+      carrito.total -= productos[i].precio*productos[i].cantidad;
+      carrito.productos.splice(i, 1);
+      localStorage.setItem("carrito", Serializable.serialize(carrito));
+      updatePrecios();
+      openCart();
+      return;
+    }
+  }
+}
+
+
 
 //Generar HTML de productos en Carrito
 const tbody = document.getElementById("cart-items");
@@ -149,15 +160,40 @@ function openCart() {
       <td>${productos[i].cantidad}</td>
       <td>${temp}</td>
       <td>
-        <button class="btn btn-sm btn-danger" onclick="deleteProduct(${productos[i].id})">
+        <button class="btn btn-sm btn-danger" id="${'borrar'+productos[i].id}">
           <i class="fas fa-trash"></i>
           Eliminar
         </button>
       </td>
     </tr>`;
+    
   }
   tbody.innerHTML = html;
+  //Generar eventos de eliminar producto
+  let targetButtons = document.getElementsByClassName("btn-danger");
+  for (let i = 0; i < targetButtons.length; i++) {
+    targetButtons[i].addEventListener("click", function (){
+      deleteProduct(trueId(targetButtons[i].id));
+    });
+  }
 }
+
+//Ya que la funcion deleteProduct no funciona con el id de los botones, se usa esta funcion para devolver el id correcto del boton
+function trueId(id) {
+  switch (id) {
+    case 'borrar1':
+      return 1;
+    case 'borrar2':
+      return 2;
+    case 'borrar3':
+      return 3;
+    default:
+      return ;
+  }
+}
+
+
+
 
 let carrito = new Carrito();
 if (localStorage.getItem("carrito")) {
@@ -172,8 +208,6 @@ openCart();
 
 
 
-//todo Tambien implementar boton eliminar 1 item del producto
-// lo anterior tambien sirve para subir desafio complementario cap 6
+
 //todo implementar boton eliminar todos los productos
- //!Esta bug ahora (objeto productos a localstorage)
-//todo pasar productos a localstorage
+
