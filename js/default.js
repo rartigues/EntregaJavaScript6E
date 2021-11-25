@@ -73,15 +73,37 @@ class Carrito {
   }
 }
 
-function agregar(form) {
-  let id = form.id.value;
-  let nombre = form.nombre.value;
-  let precio = form.precio.value;
-  let cantidad = form.cantidad.value;
+function agregar(e) {
+  let id= e.target.id.value;
+  let nombre= e.target.nombre.value;
+  let precio= e.target.precio.value;
+  let cantidad= e.target.cantidad.value;
   let producto = new Producto(id, nombre, precio, cantidad);
+  
   carrito.addProducto(producto);
   openCart();
+  e.preventDefault();
 }
+
+//todo JSON y Storage!!!
+//!EventListener Forms
+const formVainilla = document.getElementById("formVainilla");
+const formChocolate = document.getElementById("formChocolate");
+const formFrutilla = document.getElementById("formFrutilla");
+formVainilla.addEventListener("submit", agregar);
+formChocolate.addEventListener("submit", agregar);
+formFrutilla.addEventListener("submit", agregar);
+
+
+
+
+
+
+
+
+
+
+
 
 function updatePrecios(){
   let productos = carrito.getProductos();
@@ -93,9 +115,6 @@ function updatePrecios(){
   document.getElementById("cart-total").innerHTML = chileLocale.format(total);
 
 }
-
-
-
 
 //Generar HTML de productos en Carrito
 const tbody = document.getElementById("cart-items");
