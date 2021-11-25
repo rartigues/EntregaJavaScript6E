@@ -5,72 +5,74 @@ let chileLocale= Intl.NumberFormat('es-CL', {
   currency: 'CLP'
 });
 class Producto extends Serializable {
-  #id;
-  #nombre;
-  #precio;  
-  #cantidad; 
+  id;
+  nombre;
+  precio;  
+  cantidad; 
   constructor(id, nombre, precio, cantidad) {
     super();
-    this.#id = Number(id);
-    this.#nombre = nombre;
-    this.#precio = Number(precio);
-    this.#cantidad = Number(cantidad);
+    this.id = Number(id);
+    this.nombre = nombre;
+    this.precio = Number(precio);
+    this.cantidad = Number(cantidad);
+
   }
   get id() {
-    return this.#id;
+    return this.id;
   }
   get nombre() {
-    return this.#nombre;
+    return this.nombre;
   }
   get precio() {
-    return this.#precio;
+    return this.precio;
   }
   get cantidad() {
-    return this.#cantidad;
+    return this.cantidad;
   }
   set nombre(nombre) {
-    this.#nombre = nombre;
+    this.nombre = nombre;
   }
   set precio(precio) {
-    this.#precio = Number(precio);
+    this.precio = Number(precio);
   }
   set cantidad(cantidad) {
-    this.#cantidad = Number(cantidad);
+    this.cantidad = Number(cantidad);
   }
 
 }
 
 //todo juntar cuando se suman las cantidades
-class Carrito {
-  #productos;
-  #total;
+class Carrito extends Serializable {
+  productos;
+  total;
   constructor() {
-    this.#productos = [];
-    this.#total = 0;
+    super();
+    this.productos = [];
+    this.total = 0;
   }
   addProducto(Producto) {
-    for(let i = 0; i < this.#productos.length; i++) {
-      if(this.#productos[i].id === Producto.id) {
-        this.#productos[i].cantidad += Producto.cantidad;
-        this.#total += Producto.precio*Producto.cantidad;
+    for(let i = 0; i < this.productos.length; i++) {
+      if(this.productos[i].id === Producto.id) {
+        this.productos[i].cantidad += Producto.cantidad;
+        this.total += Producto.precio*Producto.cantidad;
         updatePrecios();
         return;
       }  
     } 
 
-    this.#productos.push(Producto);
-    this.#total += Producto.precio*Producto.cantidad;
+    this.productos.push(Producto);
+    this.total += Producto.precio*Producto.cantidad;
     updatePrecios();
   }
   nCantidades() {
     let cantidades = 0;
-    for (let i = 0; i < this.#productos.length; i++) {
-      cantidades += this.#productos[i].cantidad;
+    for (let i = 0; i < this.productos.length; i++) {
+      cantidades += this.productos[i].cantidad;
     }
     return cantidades;
   }
   getProductos() {
-    return this.#productos;
+    return this.productos;
   }
   addProductos(productos) {
     for(let i = 0; i < productos.length; i++) {
@@ -79,12 +81,13 @@ class Carrito {
     }
   }
   getTotal() {
-    return chileLocale.format(this.#total);
+    return chileLocale.format(this.total);
   }
 }
 
 function agregar(e) {
   let id= e.target.id.value;
+  console.log(id);
   let nombre= e.target.nombre.value;
   let precio= e.target.precio.value;
   let cantidad= e.target.cantidad.value;
@@ -92,11 +95,14 @@ function agregar(e) {
   
 
   carrito.addProducto(producto);
+  //!PRUEBA SERELIAZABLE
   let test= Serializable.serialize(producto);
   console.log(test);
   let test2= Serializable.deserialize(test);
   console.log(test2);
-  localStorage.setItem("productos", JSON.stringify(carrito.getProductos())); //!Pasar productos a localstorage
+  console.log(test2 instanceof Producto);
+  console.log(test2.id);
+  localStorage.setItem("carrito", Serializable.serialize(carrito)); //!
   openCart();
   e.preventDefault();
 }
@@ -154,11 +160,11 @@ function openCart() {
 }
 
 let carrito = new Carrito();
-if (localStorage.getItem("productos")) {
-  console.log(localStorage.getItem("productos"))
-  carrito.addProductos(JSON.parse(localStorage.getItem("productos")));
+if (localStorage.getItem("carrito")) {
+  carrito = Serializable.deserialize(localStorage.getItem("carrito"));
+  console.log(carrito);
 } else {
-  localStorage.setItem("productos", JSON.stringify(carrito.getProductos()));
+  localStorage.setItem("carrito", Serializable.serialize(carrito));
 }
 
 updatePrecios();
