@@ -8,7 +8,6 @@ Para poder ejecutar la pagina es necesario ejecutar los siguientes comandos en l
 ```
 npm install
 npm run build
-
 ```
 
 Al editar el archivo default.js, es necesario actualizar el bundle.js para que se reflejen los cambios en la pagina, usando Watchify se actualiza continuamente el archivo bundle.js al crear modificaciones
