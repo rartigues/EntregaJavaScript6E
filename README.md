@@ -1,5 +1,4 @@
 # Coderhouse Entrega Proyecto Javascript
-<sub>Por Roberto Artigues</sub>
 
 
 Se uso [Browserify](https://www.npmjs.com/package/browserify) en conjunto con [Watchify](https://www.npmjs.com/package/watchify/v/4.0.0) para implementar [jsclass-serializer](https://www.npmjs.com/package/jsclass-serializer/v/0.2.5) en el script.
@@ -14,3 +13,5 @@ Al editar el archivo default.js, es necesario actualizar el bundle.js para que s
 ```
 npm run watch
 ```
+
+<sub>Por Roberto Artigues</sub>
