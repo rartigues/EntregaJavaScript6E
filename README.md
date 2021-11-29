@@ -7,5 +7,6 @@ Se uso [Browserify](https://www.npmjs.com/package/browserify) en conjunto con [W
 Si quiere probar la implementacion de esto puede usar
 ```
 npm install
+npm run build
 npm run watch
 ```
