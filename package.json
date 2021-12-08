@@ -5,10 +5,10 @@
   "main": "./index.js",
   "dependencies": {
     "browserify": "^17.0.0",
+    "jquery": "^3.6.0",
     "jsclass-serializer": "^0.2.5",
     "watchify": "^4.0.0"
   },
-  "devDependencies": {},
   "scripts": {
     "build": "./node_modules/.bin/browserify ./js/default.js -o dist/bundle.js",
     "watch": "watchify ./js/default -o dist/bundle.js -v"

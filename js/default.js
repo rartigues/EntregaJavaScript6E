@@ -1,4 +1,5 @@
 const Serializable = require('jsclass-serializer');
+var $ = require( "jquery" );
 
 let chileLocale= Intl.NumberFormat('es-CL', {
   style: 'currency',
