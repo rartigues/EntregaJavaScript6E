@@ -103,12 +103,13 @@ function agregar(e) {
 
 //todo JSON y Storage!!!
 //!EventListener Forms
-const formVainilla = document.getElementById("formVainilla");
-const formChocolate = document.getElementById("formChocolate");
-const formFrutilla = document.getElementById("formFrutilla");
-formVainilla.addEventListener("submit", agregar);
-formChocolate.addEventListener("submit", agregar);
-formFrutilla.addEventListener("submit", agregar);
+const formVainilla = $("#formVainilla");
+const formChocolate = $("#formChocolate");
+const formFrutilla = $("#formFrutilla");
+
+formVainilla.on("submit", agregar);
+formChocolate.on("submit", agregar);
+formFrutilla.on("submit", agregar);
 
 
 
@@ -122,7 +123,8 @@ function updatePrecios(){
   for (let i = 0; i < productos.length; i++) {
     total += productos[i].precio*productos[i].cantidad;
   }
-  document.getElementById("cart-total").innerHTML = chileLocale.format(total);
+  // document.getElementById("cart-total").innerHTML = chileLocale.format(total);
+  $("#cart-total").html(chileLocale.format(total));
 }
 
 
@@ -144,10 +146,10 @@ function deleteProduct(id) {
 
 
 //Generar HTML de productos en Carrito
-const tbody = document.getElementById("cart-items");
+// const tbody = document.getElementById("cart-items");
 function openCart() {
   let productos = carrito.getProductos();
-  let total = carrito.getTotal();
+  // let total = carrito.getTotal();
   let html = "";
   for (let i = 0; i < productos.length; i++) {
     let temp= chileLocale.format(productos[i].precio*productos[i].cantidad); //Conseguir precio total en formato pesos chilenos
@@ -166,14 +168,15 @@ function openCart() {
     </tr>`;
     
   }
-  tbody.innerHTML = html;
+  $("#cart-items").html(html); //! jQuery
+  // tbody.innerHTML = html;
   //Generar eventos de eliminar producto
-  let targetButtons = document.getElementsByClassName("btn-danger");
-  for (let i = 0; i < targetButtons.length; i++) {
-    targetButtons[i].addEventListener("click", function (){
-      deleteProduct(trueId(targetButtons[i].id));
-    });
-  }
+  $(".btn-danger").each(function() {
+    let targetButtons = $(this);
+    targetButtons.on("click", function() {
+      deleteProduct(trueId(targetButtons[0].id));
+    })
+  });
 }
 
 //Ya que la funcion deleteProduct no funciona con el id de los botones, se usa esta funcion para devolver el id correcto del boton
