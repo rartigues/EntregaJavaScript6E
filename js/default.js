@@ -169,7 +169,6 @@ function openCart() {
     
   }
   $("#cart-items").html(html); //! jQuery
-  // tbody.innerHTML = html;
   //Generar eventos de eliminar producto
   $(".btn-danger").each(function() {
     let targetButtons = $(this);
@@ -203,6 +202,11 @@ if (localStorage.getItem("carrito")) {
 } else {
   localStorage.setItem("carrito", Serializable.serialize(carrito));
 }
+
+
+$("#hcupcake").on("click", function() {
+  $("#hcupcake").fadeOut(600).fadeIn(600);
+})
 
 updatePrecios();
 openCart();
