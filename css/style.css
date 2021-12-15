@@ -19,3 +19,7 @@ h1, h2 {
 	clear: both;
 	padding-top: 160px;
 }
+
+.center {
+	margin: 0 auto;
+}
