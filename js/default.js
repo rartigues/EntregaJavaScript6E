@@ -168,7 +168,7 @@ function openCart() {
     </tr>`;
     
   }
-  $("#cart-items").html(html); //! jQuery
+  $("#cart-items").hide().html(html).fadeIn(300); //! jQuery
   //Generar eventos de eliminar producto
   $(".btn-danger").each(function() {
     let targetButtons = $(this);
@@ -205,9 +205,9 @@ if (localStorage.getItem("carrito")) {
 
 
 //! Animacion simple jQuery
-$("#hcupcake").on("click", function() {
-  $("#hcupcake").fadeOut(600).fadeIn(600);
-})
+// $("#hcupcake").on("click", function() {
+//   $("#hcupcake").fadeOut(600).fadeIn(600);
+// })
 
 //Ajax para obtener api de clima actual
 $.ajax({
@@ -222,6 +222,11 @@ $.ajax({
 });
 
 
+
+
+
+//Animate body fade in
+$("body").hide().fadeIn(1000);
 
 updatePrecios();
 openCart();
