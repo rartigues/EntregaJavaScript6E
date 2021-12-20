@@ -204,9 +204,24 @@ if (localStorage.getItem("carrito")) {
 }
 
 
+//! Animacion simple jQuery
 $("#hcupcake").on("click", function() {
   $("#hcupcake").fadeOut(600).fadeIn(600);
 })
+
+//Ajax para obtener api de clima actual
+$.ajax({
+  metrod: "GET",
+  dataType: "jsonp",
+  crossDomain: true,
+  url: "http://api.meteored.cl/index.php?api_lang=cl&localidad=18576&affiliate_id=obtahpkt8134&v=3.0",
+  success: function(data) {
+    $("#temperatura").html(data.day[1].hour[0].temp + "°C");
+    
+  }
+});
+
+
 
 updatePrecios();
 openCart();
