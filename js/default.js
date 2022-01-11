@@ -131,9 +131,20 @@ $(function () {
     for (let i = 0; i < productos.length; i++) {
       total += productos[i].precio * productos[i].cantidad;
     }
-    // document.getElementById("cart-total").innerHTML = chileLocale.format(total);
     $("#cart-total").html(chileLocale.format(total));
   }
+
+
+  //! Cancelar compra button
+  function newCarrito() {
+    carrito = new Carrito();
+    localStorage.setItem("carrito", Serializable.serialize(carrito));
+    openCart();
+    $("body").hide().fadeIn(200);
+  }
+  $("#cancelarButton").on("click", function () {
+    newCarrito();
+  });
 
   //Al ejecutarse elimina el producto del carrito
   function deleteProduct(id) {
@@ -243,9 +254,8 @@ $(function () {
         $("#finalizarModal").modal('hide');")"
         // $("#toastCompra").toast();
         toastr.success('Compra realizada con exito', 'Muchas gracias 😊');
-
+        newCarrito();
       }, 400);;
-
     }
   });
 
