@@ -120,10 +120,16 @@ $(function () {
   const formVainilla = $("#formVainilla");
   const formChocolate = $("#formChocolate");
   const formFrutilla = $("#formFrutilla");
+  const formZanahoria = $("#formZanahoria");
+  const formCalabaza = $("#formCalabaza");
+  const formMarmoleado = $("#formMarmoleado")
 
   formVainilla.on("submit", agregar);
   formChocolate.on("submit", agregar);
   formFrutilla.on("submit", agregar);
+  formZanahoria.on("submit", agregar);
+  formCalabaza.on("submit", agregar);
+  formMarmoleado.on("submit", agregar);
 
   function updatePrecios() {
     let productos = carrito.getProductos();
@@ -139,6 +145,7 @@ $(function () {
   function newCarrito() {
     carrito = new Carrito();
     localStorage.setItem("carrito", Serializable.serialize(carrito));
+    updatePrecios();
     openCart();
     $("body").hide().fadeIn(200);
   }
@@ -206,6 +213,12 @@ $(function () {
         return 2;
       case "borrar3":
         return 3;
+      case "borrar4":
+        return 4;
+      case "borrar5":
+        return 5;
+      case "borrar6":
+        return 6;
       default:
         return;
     }
